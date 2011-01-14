@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+		<title>jQuery GoogleViewer Plugin Demo</title>
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
+		<script type="text/javascript">
+				
+		$(function($,undefined){
+		  $.fn.googleViewer = (function(o){   
+		      var opts = $.extend({formats:"doc",target:'_blank'},o),sel = '',fm=opts.formats.split(',');
+		      $.map(fm, function(i,x){
+		          (x == fm.length-1) ? sel += 'a[href$=' + i + ']' : sel += 'a[href$=' + i + '],';
+		      });      
+		      this.each(function(){
+		       $(this).find(sel).attr('href', function(){
+		           return 'http://docs.google.com/viewer?url=' + this.href;
+		            }).attr('target',opts.target);
+		      });
+		});		
+		  $('#content').googleViewer({'formats':'doc,pdf,docx', 'target':'_self'});
+		  
+		})(jQuery);
+		             
+		</script>
+	</head>
+	<body>
+	
+	<div id="content">
+    <a href="http://www.wgig.org/docs/WGIGREPORT.doc">Internet Gov Rules</a>
+      <a href="http://www.irs.gov/pub/irs-pdf/fw4.pdf">Income Tax Guide</a>
+    <a href="http://www.xpertdoc.com/en/Download/Samples/Resulting_Reports/XpertdocOverview.docx">Random Docx</a>    
+</div>
+
+	</body>
+</html>
